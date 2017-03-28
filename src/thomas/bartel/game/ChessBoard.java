@@ -76,15 +76,15 @@ public class ChessBoard {
 
                 if (i % 2 != 0) {
                     if (a % 2 != 0) {
-                        this.labels[index].setBackground(Color.BLACK);
-                    } else {
                         this.labels[index].setBackground(Color.WHITE);
+                    } else {
+                        this.labels[index].setBackground(Color.BLACK);
                     }
                 } else {
                     if (a % 2 != 0) {
-                        this.labels[index].setBackground(Color.WHITE);
-                    } else {
                         this.labels[index].setBackground(Color.BLACK);
+                    } else {
+                        this.labels[index].setBackground(Color.WHITE);
                     }
                 }
 
@@ -152,10 +152,14 @@ public class ChessBoard {
     public void moveChessPiece(Position positionAt, Position positionMove) {
         if (this.containsChessPiece(positionAt)) {
             ChessPiece piece = this.chessPiecesOnBoard[positionAt.y][positionAt.x];
-            this.chessPiecesOnBoard[positionAt.y][positionAt.x] = null;
-            this.chessPiecesOnBoard[positionMove.y][positionMove.x] = piece;
-            this.labels[Position.PositionToIndex(positionMove)].setIcon(new ImageIcon(piece.getRepresenterImage()));
-            this.labels[Position.PositionToIndex(positionAt)].setIcon(null);
+
+            if (piece.getValidMovePositions().contains(positionMove)) {
+                this.chessPiecesOnBoard[positionAt.y][positionAt.x] = null;
+                this.chessPiecesOnBoard[positionMove.y][positionMove.x] = piece;
+                piece.setPosition(Position.at(positionMove.x, positionMove.y));
+                this.labels[Position.PositionToIndex(positionMove)].setIcon(new ImageIcon(piece.getRepresenterImage()));
+                this.labels[Position.PositionToIndex(positionAt)].setIcon(null);
+            }
 
         }
 

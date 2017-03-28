@@ -23,10 +23,6 @@ public class RookBlack implements ChessPiece {
      * Is the image that represents the rook on the board
      */
     private BufferedImage representerImage;
-    /**
-     * Is a set of positions that the black rook can go to
-     */
-    private Set<Position> validMovePositions = new HashSet<Position>();
 
     /**
      * The constructor for a black rook chess piece
@@ -43,19 +39,6 @@ public class RookBlack implements ChessPiece {
             System.out.println(e.getMessage());
         }
 
-        this.initValidMovePositions();
-    }
-
-    /**
-     * Fills the set with every valid position for the black rook to go to
-     */
-    private void initValidMovePositions() {
-        for (int i = 0; i < 8; i++) {
-            this.validMovePositions.add(this.position.plus(Position.at(this.position.x, i)));
-            this.validMovePositions.add(this.position.plus(Position.at(this.position.x, -i)));
-            this.validMovePositions.add(this.position.plus(Position.at(i, this.position.y)));
-            this.validMovePositions.add(this.position.plus(Position.at(-i, this.position.y)));
-        }
     }
 
     @Override
@@ -75,7 +58,16 @@ public class RookBlack implements ChessPiece {
 
     @Override
     public Set<Position> getValidMovePositions() {
-        return this.validMovePositions;
+        Set<Position> validMovePositions = new HashSet<Position>();
+
+        for (int i = 0; i < 8; i++) {
+            validMovePositions.add(this.position.plus(Position.at(0, i)));
+            validMovePositions.add(this.position.plus(Position.at(0, -i)));
+            validMovePositions.add(this.position.plus(Position.at(i, 0)));
+            validMovePositions.add(this.position.plus(Position.at(-i, 0)));
+        }
+
+        return validMovePositions;
     }
 
 }
