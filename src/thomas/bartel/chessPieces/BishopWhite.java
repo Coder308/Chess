@@ -23,6 +23,10 @@ public class BishopWhite implements ChessPiece {
      * Is the image that represents the bishop on the board
      */
     private BufferedImage representerImage;
+    /**
+     * Is the number that indicates the side of the chess piece
+     */
+    private int sideIndicator;
 
     /**
      * The constructor for a white bishop chess piece
@@ -32,6 +36,7 @@ public class BishopWhite implements ChessPiece {
      */
     public BishopWhite(Position position) {
         this.position = position;
+        this.sideIndicator = 0;
 
         try {
             this.representerImage = ImageIO.read(new File("Images/BishopWhite.png"));
@@ -69,6 +74,11 @@ public class BishopWhite implements ChessPiece {
         }
 
         return validMovePositions;
+    }
+
+    @Override
+    public int getSideIndicator() {
+        return this.sideIndicator;
     }
 
 }

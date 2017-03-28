@@ -23,6 +23,10 @@ public class RookWhite implements ChessPiece {
      * Is the image that represents the rook on the board
      */
     private BufferedImage representerImage;
+    /**
+     * Is the number that indicates the side of the chess piece
+     */
+    private int sideIndicator;
 
     /**
      * The constructor for a white rook chess piece
@@ -32,6 +36,7 @@ public class RookWhite implements ChessPiece {
      */
     public RookWhite(Position position) {
         this.position = position;
+        this.sideIndicator = 0;
 
         try {
             this.representerImage = ImageIO.read(new File("Images/RookWhite.png"));
@@ -68,6 +73,11 @@ public class RookWhite implements ChessPiece {
         }
 
         return validMovePositions;
+    }
+
+    @Override
+    public int getSideIndicator() {
+        return this.sideIndicator;
     }
 
 }

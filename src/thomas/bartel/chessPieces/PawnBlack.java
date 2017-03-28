@@ -24,6 +24,10 @@ public class PawnBlack implements ChessPiece {
      * Is the image that represents the pawn on the board
      */
     private BufferedImage representerImage;
+    /**
+     * Is the number that indicates the side of the chess piece
+     */
+    private int sideIndicator;
 
     /**
      * The constructor of a black pawn
@@ -33,6 +37,7 @@ public class PawnBlack implements ChessPiece {
      */
     public PawnBlack(Position position) {
         this.position = position;
+        this.sideIndicator = 1;
 
         try {
             this.representerImage = ImageIO.read(new File("Images/PawnBlack.png"));
@@ -62,6 +67,44 @@ public class PawnBlack implements ChessPiece {
         Set<Position> validMovePositions = new HashSet<Position>();
 
         validMovePositions.add(this.position.plus(Position.at(0, 1)));
+
+        return validMovePositions;
+    }
+
+    @Override
+    public int getSideIndicator() {
+        return this.sideIndicator;
+    }
+
+    /**
+     * A method that finds every position that the black pawn can go to if the
+     * position that it is supposed to go to contains an enemy chess piece
+     * 
+     * @return a set of positions that contains every position that the black
+     *         pawn can go to if the position that it is supposed to go to
+     *         contains an enemy chess piece
+     */
+    public Set<Position> getEnemyValidMovePositions() {
+        Set<Position> validMovePositions = new HashSet<Position>();
+
+        validMovePositions.add(this.position.plus(Position.at(-1, 1)));
+        validMovePositions.add(this.position.plus(Position.at(1, 1)));
+
+        return validMovePositions;
+    }
+
+    /**
+     * A method that finds every valid position for the black pawn to go to
+     * before it moved once
+     * 
+     * @return a set of valid positions that the black pawn can go to before it
+     *         made its first move
+     */
+    public Set<Position> getFirstValidMovePositions() {
+        Set<Position> validMovePositions = new HashSet<Position>();
+
+        validMovePositions.add(this.position.plus(Position.at(0, 1)));
+        validMovePositions.add(this.position.plus(Position.at(0, 2)));
 
         return validMovePositions;
     }

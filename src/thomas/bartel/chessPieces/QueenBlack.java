@@ -23,6 +23,10 @@ public class QueenBlack implements ChessPiece {
      * Is the image that represents the queen on the board
      */
     private BufferedImage representerImage;
+    /**
+     * Is the number that indicates the side of the chess piece
+     */
+    private int sideIndicator;
 
     /**
      * The constructor for a black queen chess piece
@@ -32,6 +36,7 @@ public class QueenBlack implements ChessPiece {
      */
     public QueenBlack(Position position) {
         this.position = position;
+        this.sideIndicator = 1;
 
         try {
             this.representerImage = ImageIO.read(new File("Images/QueenBlack.png"));
@@ -71,6 +76,11 @@ public class QueenBlack implements ChessPiece {
         }
 
         return validMovePositions;
+    }
+
+    @Override
+    public int getSideIndicator() {
+        return this.sideIndicator;
     }
 
 }
