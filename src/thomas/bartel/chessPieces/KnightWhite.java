@@ -23,6 +23,10 @@ public class KnightWhite implements ChessPiece {
      * Is the image that represents the knight on the board
      */
     private BufferedImage representerImage;
+    /**
+     * Is the number that indicates the side of the chess piece
+     */
+    private int sideIndicator;
 
     /**
      * The constructor for a white knight chess piece
@@ -32,6 +36,7 @@ public class KnightWhite implements ChessPiece {
      */
     public KnightWhite(Position position) {
         this.position = position;
+        this.sideIndicator = 0;
 
         try {
             this.representerImage = ImageIO.read(new File("Images/KnightWhite.png"));
@@ -69,6 +74,12 @@ public class KnightWhite implements ChessPiece {
         validMovePositions.add(this.position.plus(Position.at(1, 2)));
 
         return validMovePositions;
+    }
+
+    @Override
+    public int getSideIndicator() {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
 }

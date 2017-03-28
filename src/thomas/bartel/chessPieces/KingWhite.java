@@ -23,6 +23,10 @@ public class KingWhite implements ChessPiece {
      * Is the image that represents the king on the board
      */
     private BufferedImage representerImage;
+    /**
+     * Is the number that indicates the side of the chess piece
+     */
+    private int sideIndicator;
 
     /**
      * The constructor for a white king chess piece
@@ -32,6 +36,7 @@ public class KingWhite implements ChessPiece {
      */
     public KingWhite(Position position) {
         this.position = position;
+        this.sideIndicator = 0;
 
         try {
             this.representerImage = ImageIO.read(new File("Images/KingWhite.png"));
@@ -69,6 +74,11 @@ public class KingWhite implements ChessPiece {
         }
 
         return validMovePositions;
+    }
+
+    @Override
+    public int getSideIndicator() {
+        return this.sideIndicator;
     }
 
 }

@@ -41,4 +41,11 @@ public interface ChessPiece {
      *         chess piece to move to
      */
     Set<Position> getValidMovePositions();
+
+    /**
+     * A method to get the side indicator of a chess piece
+     * 
+     * @return 0 if the chess piece is white. 1 if the chess piece is black
+     */
+    int getSideIndicator();
 }

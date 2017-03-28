@@ -1,6 +1,9 @@
 package thomas.bartel.game;
 
 import java.awt.*;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.swing.*;
 import thomas.bartel.chessPieces.*;
 
@@ -149,18 +152,17 @@ public class ChessBoard {
      * @param positionMove
      *            is the position that the chess piece should move to
      */
-    public void moveChessPiece(Position positionAt, Position positionMove) {
+    public void moveChessPiece(Position positionAt, Position positionMove, int roundCounter) {
         if (this.containsChessPiece(positionAt)) {
             ChessPiece piece = this.chessPiecesOnBoard[positionAt.y][positionAt.x];
 
-            if (piece.getValidMovePositions().contains(positionMove)) {
-                this.chessPiecesOnBoard[positionAt.y][positionAt.x] = null;
-                this.chessPiecesOnBoard[positionMove.y][positionMove.x] = piece;
-                piece.setPosition(Position.at(positionMove.x, positionMove.y));
-                this.labels[Position.PositionToIndex(positionMove)].setIcon(new ImageIcon(piece.getRepresenterImage()));
-                this.labels[Position.PositionToIndex(positionAt)].setIcon(null);
+            if (piece instanceof PawnWhite) {
+                this.movePawnWhitePiece(positionAt, positionMove, (PawnWhite) piece);
+            } else if (piece instanceof PawnBlack) {
+                this.movePawnBlackPiece(positionAt, positionMove, (PawnBlack) piece);
+            } else {
+                this.moveOtherPieces(positionAt, positionMove, piece);
             }
-
         }
 
     }
@@ -182,36 +184,140 @@ public class ChessBoard {
     }
 
     /**
-     * A helper method to determine if the given position is on the chess board
+     * A helper method to move a white pawn piece. It is used because there are
+     * some special rules that don't apply for any of the other chess pieces
      * 
-     * @param position
-     *            is the position that the method checks
-     * @return true if the given position is in the boundaries of the chess
-     *         board
+     * @param positionAt
+     *            is the position that the white pawn is currently at
+     * @param positionMove
+     *            is the position that the white pawn is supposed to be moved to
+     * @param pawn
+     *            is the white pawn chess piece
      */
-    private boolean containsPosition(Position position) {
-        if (position.y < this.chessPiecesOnBoard.length && position.x < this.chessPiecesOnBoard[0].length) {
-            if (position.y > 0 && position.x > 0) {
-                return true;
-            } else {
-                return false;
+    private void movePawnWhitePiece(Position positionAt, Position positionMove, PawnWhite pawn) {
+        if (this.containsChessPiece(positionMove)) {
+
+            if (pawn.getEnemyValidMovePositions().contains(positionMove) && pawn
+                    .getSideIndicator() != this.chessPiecesOnBoard[positionMove.y][positionMove.x].getSideIndicator()) {
+
+                this.chessPiecesOnBoard[positionAt.y][positionAt.x] = null;
+                this.chessPiecesOnBoard[positionMove.y][positionMove.x] = pawn;
+                pawn.setPosition(Position.at(positionMove.x, positionMove.y));
+                this.labels[Position.PositionToIndex(positionMove)].setIcon(new ImageIcon(pawn.getRepresenterImage()));
+                this.labels[Position.PositionToIndex(positionAt)].setIcon(null);
+
             }
+
+        } else if (positionAt.y == 6) {
+
+            if (pawn.getFirstValidMovePositions().contains(positionMove)) {
+
+                this.chessPiecesOnBoard[positionAt.y][positionAt.x] = null;
+                this.chessPiecesOnBoard[positionMove.y][positionMove.x] = pawn;
+                pawn.setPosition(Position.at(positionMove.x, positionMove.y));
+                this.labels[Position.PositionToIndex(positionMove)].setIcon(new ImageIcon(pawn.getRepresenterImage()));
+                this.labels[Position.PositionToIndex(positionAt)].setIcon(null);
+
+            }
+
         } else {
-            return false;
+
+            if (pawn.getValidMovePositions().contains(positionMove)) {
+
+                this.chessPiecesOnBoard[positionAt.y][positionAt.x] = null;
+                this.chessPiecesOnBoard[positionMove.y][positionMove.x] = pawn;
+                pawn.setPosition(Position.at(positionMove.x, positionMove.y));
+                this.labels[Position.PositionToIndex(positionMove)].setIcon(new ImageIcon(pawn.getRepresenterImage()));
+                this.labels[Position.PositionToIndex(positionAt)].setIcon(null);
+            }
+
         }
     }
 
     /**
-     * A helper method to move a pawn piece. It is used because there are some
-     * special rules that don't apply for any of the other chess pieces
+     * A helper method to move a black pawn piece. It is used because there are
+     * some special rules that don't apply for any of the other chess pieces
      * 
      * @param positionAt
-     *            is the position that the pawn is currently at
+     *            is the position that the black pawn is currently at
      * @param positionMove
-     *            is the position that the pawn is supposed to be moved to
+     *            is the position that the black pawn is supposed to be moved to
+     * @param pawn
+     *            is the black pawn chess piece
      */
-    private void movePawnPiece(Position positionAt, Position positionMove) {
+    private void movePawnBlackPiece(Position positionAt, Position positionMove, PawnBlack pawn) {
+        if (this.containsChessPiece(positionMove)) {
 
+            if (pawn.getEnemyValidMovePositions().contains(positionMove) && pawn
+                    .getSideIndicator() != this.chessPiecesOnBoard[positionMove.y][positionMove.x].getSideIndicator()) {
+
+                this.chessPiecesOnBoard[positionAt.y][positionAt.x] = null;
+                this.chessPiecesOnBoard[positionMove.y][positionMove.x] = pawn;
+                pawn.setPosition(Position.at(positionMove.x, positionMove.y));
+                this.labels[Position.PositionToIndex(positionMove)].setIcon(new ImageIcon(pawn.getRepresenterImage()));
+                this.labels[Position.PositionToIndex(positionAt)].setIcon(null);
+
+            }
+
+        } else if (positionAt.y == 1) {
+
+            if (pawn.getFirstValidMovePositions().contains(positionMove)) {
+
+                this.chessPiecesOnBoard[positionAt.y][positionAt.x] = null;
+                this.chessPiecesOnBoard[positionMove.y][positionMove.x] = pawn;
+                pawn.setPosition(Position.at(positionMove.x, positionMove.y));
+                this.labels[Position.PositionToIndex(positionMove)].setIcon(new ImageIcon(pawn.getRepresenterImage()));
+                this.labels[Position.PositionToIndex(positionAt)].setIcon(null);
+
+            }
+
+        } else {
+
+            if (pawn.getValidMovePositions().contains(positionMove)) {
+
+                this.chessPiecesOnBoard[positionAt.y][positionAt.x] = null;
+                this.chessPiecesOnBoard[positionMove.y][positionMove.x] = pawn;
+                pawn.setPosition(Position.at(positionMove.x, positionMove.y));
+                this.labels[Position.PositionToIndex(positionMove)].setIcon(new ImageIcon(pawn.getRepresenterImage()));
+                this.labels[Position.PositionToIndex(positionAt)].setIcon(null);
+            }
+
+        }
+    }
+
+    /**
+     * A helper method to move any chess piece that isn't a pawn
+     * 
+     * @param positionAt
+     *            is the position that the chess piece is currently at
+     * @param positionMove
+     *            is the position that the chess piece is supposed to be moved
+     *            to
+     * @param piece
+     *            is the chess piece
+     */
+    private void moveOtherPieces(Position positionAt, Position positionMove, ChessPiece piece) {
+        if (piece.getValidMovePositions().contains(positionMove) && this.containsChessPiece(positionMove)) {
+
+            if (piece.getSideIndicator() != this.chessPiecesOnBoard[positionMove.y][positionMove.y]
+                    .getSideIndicator()) {
+
+                this.chessPiecesOnBoard[positionAt.y][positionAt.x] = null;
+                this.chessPiecesOnBoard[positionMove.y][positionMove.x] = piece;
+                piece.setPosition(Position.at(positionMove.x, positionMove.y));
+                this.labels[Position.PositionToIndex(positionMove)].setIcon(new ImageIcon(piece.getRepresenterImage()));
+                this.labels[Position.PositionToIndex(positionAt)].setIcon(null);
+            }
+
+        } else if (piece.getValidMovePositions().contains(positionMove)) {
+
+            this.chessPiecesOnBoard[positionAt.y][positionAt.x] = null;
+            this.chessPiecesOnBoard[positionMove.y][positionMove.x] = piece;
+            piece.setPosition(Position.at(positionMove.x, positionMove.y));
+            this.labels[Position.PositionToIndex(positionMove)].setIcon(new ImageIcon(piece.getRepresenterImage()));
+            this.labels[Position.PositionToIndex(positionAt)].setIcon(null);
+
+        }
     }
 
 }
