@@ -23,10 +23,6 @@ public class BishopWhite implements ChessPiece {
      * Is the image that represents the bishop on the board
      */
     private BufferedImage representerImage;
-    /**
-     * Is a set of positions that the white bishop can go to
-     */
-    private Set<Position> validMovePositions = new HashSet<Position>();
 
     /**
      * The constructor for a white bishop chess piece
@@ -43,19 +39,6 @@ public class BishopWhite implements ChessPiece {
             System.out.println(e.getMessage());
         }
 
-        this.initValidMovePositions();
-    }
-
-    /**
-     * Fills the set with every valid position for the white bishop to go to
-     */
-    private void initValidMovePositions() {
-        for (int i = 0; i < 8; i++) {
-            this.validMovePositions.add(this.position.plus(Position.at(i, i)));
-            this.validMovePositions.add(this.position.plus(Position.at(-i, i)));
-            this.validMovePositions.add(this.position.plus(Position.at(i, -i)));
-            this.validMovePositions.add(this.position.plus(Position.at(-i, -i)));
-        }
     }
 
     @Override
@@ -76,7 +59,16 @@ public class BishopWhite implements ChessPiece {
 
     @Override
     public Set<Position> getValidMovePositions() {
-        return this.validMovePositions;
+        Set<Position> validMovePositions = new HashSet<Position>();
+
+        for (int i = 0; i < 8; i++) {
+            validMovePositions.add(this.position.plus(Position.at(i, i)));
+            validMovePositions.add(this.position.plus(Position.at(-i, i)));
+            validMovePositions.add(this.position.plus(Position.at(i, -i)));
+            validMovePositions.add(this.position.plus(Position.at(-i, -i)));
+        }
+
+        return validMovePositions;
     }
 
 }

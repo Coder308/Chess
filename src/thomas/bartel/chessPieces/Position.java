@@ -51,7 +51,7 @@ public class Position {
      *         coordinates and the coordinates of the given position
      */
     public Position plus(Position position) {
-        return Position.at(this.x + x, this.y + y);
+        return Position.at(this.x + position.x, this.y + position.y);
     }
 
     @Override

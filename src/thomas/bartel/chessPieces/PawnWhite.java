@@ -23,10 +23,6 @@ public class PawnWhite implements ChessPiece {
      * Is the image that represents the pawn on the board
      */
     private BufferedImage representerImage;
-    /**
-     * Is a set of positions that the white pawn can go to
-     */
-    private Set<Position> validMovePositions = new HashSet<Position>();
 
     /**
      * The constructor of a white pawn
@@ -43,7 +39,6 @@ public class PawnWhite implements ChessPiece {
             System.out.println(e.getMessage());
         }
 
-        this.validMovePositions.add(Position.at(this.position.x, this.position.y - 1));
     }
 
     @Override
@@ -63,7 +58,11 @@ public class PawnWhite implements ChessPiece {
 
     @Override
     public Set<Position> getValidMovePositions() {
-        return this.validMovePositions;
+        Set<Position> validMovePositions = new HashSet<Position>();
+
+        validMovePositions.add(this.position.plus(Position.at(0, -1)));
+
+        return validMovePositions;
     }
 
 }

@@ -59,6 +59,16 @@ public class KnightBlack implements ChessPiece {
     @Override
     public Set<Position> getValidMovePositions() {
         Set<Position> validMovePositions = new HashSet<Position>();
-        return null;
+
+        validMovePositions.add(this.position.plus(Position.at(-2, 1)));
+        validMovePositions.add(this.position.plus(Position.at(-2, -1)));
+        validMovePositions.add(this.position.plus(Position.at(-1, -2)));
+        validMovePositions.add(this.position.plus(Position.at(-1, 2)));
+        validMovePositions.add(this.position.plus(Position.at(2, -1)));
+        validMovePositions.add(this.position.plus(Position.at(2, 1)));
+        validMovePositions.add(this.position.plus(Position.at(1, -2)));
+        validMovePositions.add(this.position.plus(Position.at(1, 2)));
+
+        return validMovePositions;
     }
 }

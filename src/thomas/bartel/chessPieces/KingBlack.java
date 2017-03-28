@@ -3,6 +3,7 @@ package thomas.bartel.chessPieces;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
@@ -56,7 +57,18 @@ public class KingBlack implements ChessPiece {
 
     @Override
     public Set<Position> getValidMovePositions() {
-        return null;
+        Set<Position> validMovePositions = new HashSet<Position>();
+
+        for (int i = 0; i <= 1; i++) {
+            for (int a = 0; a <= 1; a++) {
+                validMovePositions.add(this.position.plus(Position.at(i, a)));
+                validMovePositions.add(this.position.plus(Position.at(-i, -a)));
+                validMovePositions.add(this.position.plus(Position.at(-i, a)));
+                validMovePositions.add(this.position.plus(Position.at(i, -a)));
+            }
+        }
+
+        return validMovePositions;
     }
 
 }
