@@ -1,7 +1,9 @@
 package thomas.bartel.chessPieces;
 
+import java.util.LinkedList;
+
 /**
- * A position with a x coordinate and a y coordinates
+ * A position with a x coordinate and a y coordinate
  * 
  * @author Thomas Bartel
  *
@@ -121,6 +123,78 @@ public class Position {
     @Override
     public String toString() {
         return "(" + this.x + "," + this.y + ")";
+    }
+
+    /**
+     * A static method that finds every position that lays in a line between the
+     * two given positions. This set also contains the two given positions
+     * 
+     * @param positionAt
+     *            is the position that you start from
+     * @param positionMove
+     *            is the position that you want to go to
+     * @return a set of every position that in a line between the two given
+     *         positions. It also contains both given positionsS
+     */
+    public static LinkedList<Position> positionsInLine(Position positionAt, Position positionMove) {
+        LinkedList<Position> positionsInLine = new LinkedList<Position>();
+        positionsInLine.add(positionAt);
+        Position delta = null;
+
+        if (positionAt.x == positionMove.x) {
+            for (int i = 0; i < 8; i++) {
+                if (positionAt.plus(Position.at(0, i)).equals(positionMove)) {
+                    delta = Position.at(0, 1);
+                    break;
+                } else if (positionAt.plus(Position.at(0, -i)).equals(positionMove)) {
+                    delta = Position.at(0, -1);
+                    break;
+                }
+            }
+
+        } else if (positionAt.y == positionMove.y) {
+            for (int i = 0; i < 8; i++) {
+                if (positionAt.plus(Position.at(i, 0)).equals(positionMove)) {
+                    delta = Position.at(1, 0);
+                    break;
+                } else if (positionAt.plus(Position.at(-i, 0)).equals(positionMove)) {
+                    delta = Position.at(-1, 0);
+                    break;
+                }
+            }
+
+        } else if (positionAt.x < positionMove.x) {
+            for (int i = 0; i < 8; i++) {
+                if (positionAt.plus(Position.at(i, i)).equals(positionMove)) {
+                    delta = Position.at(1, 1);
+                    break;
+                } else if (positionAt.plus(Position.at(i, -i)).equals(positionMove)) {
+                    delta = Position.at(1, -1);
+                    break;
+                }
+            }
+
+        } else if (positionAt.x > positionMove.x) {
+            for (int i = 0; i < 8; i++) {
+                if (positionAt.plus(Position.at(-i, i)).equals(positionMove)) {
+                    delta = Position.at(-1, 1);
+                    break;
+                } else if (positionAt.plus(Position.at(-i, -i)).equals(positionMove)) {
+                    delta = Position.at(-1, -1);
+                    break;
+                }
+            }
+        }
+
+        Position savePosition = delta;
+
+        while (!positionsInLine.contains(positionMove)) {
+            positionsInLine.add(positionAt.plus(delta));
+
+            delta = delta.plus(savePosition);
+        }
+
+        return positionsInLine;
     }
 
 }
