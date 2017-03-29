@@ -1,8 +1,6 @@
 package thomas.bartel.game;
 
 import java.awt.*;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.swing.*;
 import thomas.bartel.chessPieces.*;
@@ -299,7 +297,7 @@ public class ChessBoard {
     private void moveOtherPieces(Position positionAt, Position positionMove, ChessPiece piece) {
         if (piece.getValidMovePositions().contains(positionMove) && this.containsChessPiece(positionMove)) {
 
-            if (piece.getSideIndicator() != this.chessPiecesOnBoard[positionMove.y][positionMove.y]
+            if (piece.getSideIndicator() != this.chessPiecesOnBoard[positionMove.y][positionMove.x]
                     .getSideIndicator()) {
 
                 this.chessPiecesOnBoard[positionAt.y][positionAt.x] = null;
