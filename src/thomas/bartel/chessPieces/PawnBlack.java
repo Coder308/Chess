@@ -2,7 +2,6 @@ package thomas.bartel.chessPieces;
 
 import java.awt.image.BufferedImage;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -40,9 +39,9 @@ public class PawnBlack implements ChessPiece {
         this.sideIndicator = 1;
 
         try {
-            this.representerImage = ImageIO.read(new File("Images/PawnBlack.png"));
+            this.representerImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("PawnBlack.png"));
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
     }

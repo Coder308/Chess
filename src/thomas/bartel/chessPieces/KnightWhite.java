@@ -1,7 +1,6 @@
 package thomas.bartel.chessPieces;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -39,9 +38,9 @@ public class KnightWhite implements ChessPiece {
         this.sideIndicator = 0;
 
         try {
-            this.representerImage = ImageIO.read(new File("Images/KnightWhite.png"));
+            this.representerImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("KnightWhite.png"));
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -78,8 +77,7 @@ public class KnightWhite implements ChessPiece {
 
     @Override
     public int getSideIndicator() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.sideIndicator;
     }
 
 }
