@@ -38,7 +38,7 @@ public class BishopBlack implements ChessPiece {
         this.sideIndicator = 1;
 
         try {
-            this.representerImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("BishopBlack.png"));
+            this.representerImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("chessImages/BishopBlack.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
