@@ -5,4 +5,4 @@ This game of chess that I developed is simply a little training for me the get u
 
 I used the images folder in eclipse as a source folder. Therefore the import of the images in the classes that implement chess pieces has to be changed depending on if you don't mark the images folder as a source folder in eclipse.
 
-The game isn't fully finished and it just works in the IDE Eclipse. I am still not able to create a runnable jar file and as long as this isn't possible, there won't be a finished game to play
+I finally made it possible to make a runnable jar file. It will be possible to play the finished game even without using the IDE. There are still some changes that need to be made, because I still haven't included a win condition that stops the game. I will do that soon.
