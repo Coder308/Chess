@@ -48,4 +48,5 @@ public interface ChessPiece {
      * @return 0 if the chess piece is white. 1 if the chess piece is black
      */
     int getSideIndicator();
+
 }

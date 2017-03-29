@@ -38,7 +38,8 @@ public class BishopBlack implements ChessPiece {
         this.sideIndicator = 1;
 
         try {
-            this.representerImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("chessImages/BishopBlack.png"));
+            this.representerImage = ImageIO
+                    .read(this.getClass().getClassLoader().getResourceAsStream("chessImages/BishopBlack.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,6 +79,17 @@ public class BishopBlack implements ChessPiece {
     @Override
     public int getSideIndicator() {
         return this.sideIndicator;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        } else if (other instanceof BishopBlack) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
