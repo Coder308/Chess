@@ -38,7 +38,7 @@ public class KingWhite implements ChessPiece {
         this.sideIndicator = 0;
 
         try {
-            this.representerImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("KingWhite.png"));
+            this.representerImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("chessImages/KingWhite.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

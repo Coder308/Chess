@@ -39,7 +39,7 @@ public class PawnBlack implements ChessPiece {
         this.sideIndicator = 1;
 
         try {
-            this.representerImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("PawnBlack.png"));
+            this.representerImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("chessImages/PawnBlack.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

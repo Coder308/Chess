@@ -38,7 +38,7 @@ public class QueenBlack implements ChessPiece {
         this.sideIndicator = 1;
 
         try {
-            this.representerImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("QueenBlack.png"));
+            this.representerImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("chessImages/QueenBlack.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -38,7 +38,7 @@ public class RookBlack implements ChessPiece {
         this.sideIndicator = 1;
 
         try {
-            this.representerImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("RookBlack.png"));
+            this.representerImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("chessImages/RookBlack.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

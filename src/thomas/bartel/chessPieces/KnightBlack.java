@@ -39,7 +39,7 @@ public class KnightBlack implements ChessPiece {
         this.sideIndicator = 1;
 
         try {
-            this.representerImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("KnightBlack.png"));
+            this.representerImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("chessImages/KnightBlack.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
