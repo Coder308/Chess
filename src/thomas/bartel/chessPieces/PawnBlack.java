@@ -107,5 +107,17 @@ public class PawnBlack implements ChessPiece {
 
         return validMovePositions;
     }
+    
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        } else if (other instanceof PawnBlack) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }

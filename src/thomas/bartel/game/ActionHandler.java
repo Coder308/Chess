@@ -29,10 +29,6 @@ public class ActionHandler {
      * Is the second position on the board that was clicked on
      */
     private Position secondChosenPosition = null;
-    /**
-     * Is a counter to determine which players round it is
-     */
-    private int roundCounter;
 
     /**
      * The constructor for an action handler
@@ -40,7 +36,6 @@ public class ActionHandler {
     public ActionHandler() {
         this.chessBoard = new ChessBoard();
         this.labels = this.chessBoard.getLabels();
-        this.roundCounter = 0;
 
         for (int i = 0; i < labels.length; i++) {
             int index = i;
@@ -68,7 +63,7 @@ public class ActionHandler {
             this.firstChosenPosition = Position.IndexToPosition(index);
         } else {
             this.secondChosenPosition = Position.IndexToPosition(index);
-            this.chessBoard.moveChessPiece(this.firstChosenPosition, this.secondChosenPosition, this.roundCounter);
+            this.chessBoard.moveChessPiece(this.firstChosenPosition, this.secondChosenPosition);
             this.firstChosenPosition = null;
             this.secondChosenPosition = null;
         }

@@ -106,5 +106,17 @@ public class PawnWhite implements ChessPiece {
 
         return validMovePositions;
     }
+    
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        } else if (other instanceof PawnWhite) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }

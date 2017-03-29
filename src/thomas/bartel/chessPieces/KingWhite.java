@@ -79,5 +79,17 @@ public class KingWhite implements ChessPiece {
     public int getSideIndicator() {
         return this.sideIndicator;
     }
+    
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        } else if (other instanceof KingWhite) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }

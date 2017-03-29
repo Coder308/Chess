@@ -78,5 +78,17 @@ public class RookWhite implements ChessPiece {
     public int getSideIndicator() {
         return this.sideIndicator;
     }
+    
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        } else if (other instanceof RookWhite) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }
