@@ -280,6 +280,12 @@ public class ChessBoard {
             }
 
         }
+
+        if (pawn.getPosition().y == 0) {
+            this.chessPiecesOnBoard[pawn.getPosition().y][pawn.getPosition().x] = new QueenWhite(pawn.getPosition());
+            this.labels[Position.PositionToIndex(pawn.getPosition())].setIcon(new ImageIcon(
+                    this.chessPiecesOnBoard[pawn.getPosition().y][pawn.getPosition().x].getRepresenterImage()));
+        }
     }
 
     /**
@@ -332,6 +338,12 @@ public class ChessBoard {
                 this.labels[Position.PositionToIndex(positionAt)].setIcon(null);
             }
 
+        }
+
+        if (pawn.getPosition().y == 7) {
+            this.chessPiecesOnBoard[pawn.getPosition().y][pawn.getPosition().x] = new QueenBlack(pawn.getPosition());
+            this.labels[Position.PositionToIndex(pawn.getPosition())].setIcon(new ImageIcon(
+                    this.chessPiecesOnBoard[pawn.getPosition().y][pawn.getPosition().x].getRepresenterImage()));
         }
     }
 
