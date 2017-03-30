@@ -1,6 +1,5 @@
 package thomas.bartel.game;
 
-import thomas.bartel.chessPieces.Position;
 
 /**
  * The main method that executes the chess game
@@ -18,6 +17,7 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        @SuppressWarnings("unused")
         ActionHandler handler = new ActionHandler();
         
 

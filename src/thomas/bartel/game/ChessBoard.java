@@ -35,6 +35,18 @@ public class ChessBoard {
      * Is a counter for the amount of rounds played;
      */
     private int roundCounter;
+    /**
+     * Is the original color of the label that is chosen right now
+     */
+    private Color backgroundColor;
+    /**
+     * Is a panel that the board panel will be placed on
+     */
+    private JPanel window = new JPanel(new BorderLayout());
+    /**
+     * Is a label that shows whose turn it is
+     */
+    private JLabel turnIndicator;
 
     /**
      * The constructor of a chess board
@@ -43,8 +55,8 @@ public class ChessBoard {
         this.initChessPieces();
         this.initLables();
         this.initBoard();
+        this.initWindow();
         this.frame.setSize(1000, 1000);
-        this.frame.add(this.board);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setTitle("A simple game of chess");
         this.frame.setVisible(true);
@@ -65,6 +77,18 @@ public class ChessBoard {
         }
         this.initFirstBlackRow();
         this.initFirstWhiteRow();
+    }
+
+    /**
+     * Initializes the windowpanel where the turnindicatorlabel and the
+     * boardpanel are located
+     */
+    private void initWindow() {
+        this.turnIndicator = new JLabel("The white side begins!");
+        this.window.add(this.turnIndicator, BorderLayout.NORTH);
+        this.window.add(this.board, BorderLayout.CENTER);
+        this.frame.add(this.window);
+
     }
 
     /**
@@ -179,6 +203,12 @@ public class ChessBoard {
 
         if (!this.equalsBoard(this.chessPiecesOnBoard, copyBoard)) {
             this.roundCounter++;
+        }
+
+        if (this.roundCounter % 2 != 0) {
+            this.turnIndicator.setText("It's the black sides turn!");
+        } else {
+            this.turnIndicator.setText("It's the white sides turn!");
         }
 
     }
@@ -452,6 +482,63 @@ public class ChessBoard {
         }
 
         return true;
+    }
+
+    /**
+     * A method that highlights the label that is chosen by the player
+     * 
+     * @param index
+     *            is the index of the label that needs to be highlighted
+     */
+    public void highlight(int index) {
+        this.backgroundColor = this.labels[index].getBackground();
+        this.labels[index].setBackground(Color.YELLOW);
+    }
+
+    /**
+     * A method that sets the color of the board back to its original state
+     * 
+     * @param index
+     *            is the index of the label that needs to be changeds to its old
+     *            color
+     */
+    public void normalize(int index) {
+        this.labels[index].setBackground(this.backgroundColor);
+        this.backgroundColor = null;
+    }
+
+    /**
+     * A method that determines if there is still a white king on the board
+     * 
+     * @return true if there exist a white king chess piece on the board
+     */
+    public boolean containsWhiteKing() {
+        for (ChessPiece[] columns : this.chessPiecesOnBoard) {
+            for (ChessPiece piece : columns) {
+                if (piece instanceof KingWhite) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * A method that determines if there is still a black king on the board
+     * 
+     * @return true if there exists a black king chess piece on the board
+     */
+    public boolean containsBlackKing() {
+        for (ChessPiece[] columns : this.chessPiecesOnBoard) {
+            for (ChessPiece piece : columns) {
+                if (piece instanceof KingBlack) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
 }

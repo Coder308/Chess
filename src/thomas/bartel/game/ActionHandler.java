@@ -29,6 +29,10 @@ public class ActionHandler {
      * Is the second position on the board that was clicked on
      */
     private Position secondChosenPosition = null;
+    /**
+     * Is the index of the first chosen label;
+     */
+    private int labelIndex;
 
     /**
      * The constructor for an action handler
@@ -44,6 +48,14 @@ public class ActionHandler {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     clickOnLabel(index);
+
+                    if (!chessBoard.containsWhiteKing()) {
+                        JOptionPane.showMessageDialog(null, "The black side has won!");
+                        System.exit(0);
+                    } else if (!chessBoard.containsBlackKing()) {
+                        JOptionPane.showMessageDialog(null, "The white side has won!");
+                        System.exit(0);
+                    }
                 }
 
             });
@@ -61,11 +73,14 @@ public class ActionHandler {
     public void clickOnLabel(int index) {
         if (this.firstChosenPosition == null) {
             this.firstChosenPosition = Position.IndexToPosition(index);
+            this.labelIndex = index;
+            this.chessBoard.highlight(this.labelIndex);
         } else {
             this.secondChosenPosition = Position.IndexToPosition(index);
             this.chessBoard.moveChessPiece(this.firstChosenPosition, this.secondChosenPosition);
             this.firstChosenPosition = null;
             this.secondChosenPosition = null;
+            this.chessBoard.normalize(this.labelIndex);
         }
 
     }
