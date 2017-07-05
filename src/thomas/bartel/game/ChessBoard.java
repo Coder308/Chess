@@ -58,6 +58,7 @@ public class ChessBoard {
         this.initWindow();
         this.frame.setSize(1000, 1000);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setResizable(false);
         this.frame.setTitle("A simple game of chess");
         this.frame.setVisible(true);
         this.roundCounter = 0;
